@@ -3,7 +3,7 @@ package com.tus.restbucks.controller;
 import com.tus.restbucks.dao.UserRepository;
 import com.tus.restbucks.dto.Order;
 import com.tus.restbucks.dto.User;
-import com.tus.restbucks.exceptions.OrderNotFoundException;
+import com.tus.restbucks.exceptions.NotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,7 +58,7 @@ public class UserService {
       // Just return 200 ok response
       return ResponseEntity.status(HttpStatus.OK).body(user);
     } else {
-      throw new OrderNotFoundException("No user with username" + username);
+      throw new NotFoundException("No user with username" + username);
     }
   }
 
@@ -69,7 +69,7 @@ public class UserService {
     if (user != null) {
       userRepo.delete(user);
     } else {
-      throw new OrderNotFoundException("No user with username: " + username);
+      throw new NotFoundException("No user with username: " + username);
     }
   }
 }

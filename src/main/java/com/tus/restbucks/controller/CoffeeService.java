@@ -2,15 +2,15 @@ package com.tus.restbucks.controller;
 
 import com.tus.restbucks.dto.Coffee;
 import com.tus.restbucks.dto.Order;
-import com.tus.restbucks.exceptions.OrderNotFoundException;
+import com.tus.restbucks.exceptions.NotFoundException;
 import com.tus.restbucks.controller.CoffeeService;
 import com.tus.restbucks.dao.CoffeeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.core.Authentication;
+//import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -33,12 +33,13 @@ public class CoffeeService {
     return ResponseEntity.status(HttpStatus.OK).body(savedCoffee);
   }
 
-  // Read
+  // // Read
   @GetMapping
   public Iterable<Coffee> getAllCoffees() {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    String username = authentication.getName();
-    System.out.println(username);
+    // Authentication authentication =
+    // SecurityContextHolder.getContext().getAuthentication();
+    // String username = authentication.getName();
+    // System.out.println(username);
     return coffeeRepo.findAll();
   }
 
@@ -48,7 +49,7 @@ public class CoffeeService {
     if (coffee.isPresent()) {
       return coffee;
     } else {
-      throw new OrderNotFoundException("No coffee with id: " + id);
+      throw new NotFoundException("No coffee with id: " + id);
     }
   }
 
@@ -61,7 +62,7 @@ public class CoffeeService {
       // Just return 200 ok response
       return ResponseEntity.status(HttpStatus.OK).body(coffee);
     } else {
-      throw new OrderNotFoundException("No coffee with id" + id);
+      throw new NotFoundException("No coffee with id" + id);
     }
   }
 
@@ -73,7 +74,7 @@ public class CoffeeService {
       Coffee existingCoffee = coffee.get();
       coffeeRepo.delete(existingCoffee);
     } else {
-      throw new OrderNotFoundException("No coffee with id: " + id);
+      throw new NotFoundException("No coffee with id: " + id);
     }
   }
 

@@ -1,40 +1,49 @@
 package com.tus.restbucks.dto;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
-import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name = "wine")
+@Table(name = "orders") // Specify the table name in the database
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "order_id")
 	private Long id;
-	private int year;
-	@Size(min = 3) // the name has to be a minimum size of 3(validation)
-	private String name;
-	private String grapes;
-	private String country;
-	private String region;
-	@Lob
-	private String description;
-	private String picture;
 
+	@Column(name = "username")
+	private String username;
+
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonManagedReference
+	private List<Coffee> coffees;
+
+	@Column(name = "order_status")
+	private String orderStatus;
+
+	@Column(name = "payment_method")
+	private String paymentMethod;
+
+	@Column(name = "total_amount")
+	private double totalAmount;
+
+	// Constructors
 	public Order() {
+		this.coffees = new ArrayList<Coffee>();
 	}
 
-	public Order(Long id, String name, int year, String grapes, String country, String region,
-			String description, String picture) {
-		this.id = id;
-		this.name = name;
-		this.year = year;
-		this.grapes = grapes;
-		this.country = country;
-		this.region = region;
-		this.description = description;
-		this.picture = picture;
+	public Order(String username, String orderStatus, String paymentMethod, double totalAmount) {
+		this.username = username;
+		this.orderStatus = orderStatus;
+		this.paymentMethod = paymentMethod;
+		this.totalAmount = totalAmount;
+		this.coffees = new ArrayList<Coffee>();
 	}
 
+	// Getters and setters
 	public Long getId() {
 		return id;
 	}
@@ -43,68 +52,43 @@ public class Order {
 		this.id = id;
 	}
 
-	public int getYear() {
-		return year;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setYear(int year) {
-		this.year = year;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getName() {
-		return name;
+	public List<Coffee> getCoffees() {
+		return coffees;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCoffees(List<Coffee> coffees) {
+		this.coffees = coffees;
 	}
 
-	public String getGrapes() {
-		return grapes;
+	public String getOrderStatus() {
+		return orderStatus;
 	}
 
-	public void setGrapes(String grapes) {
-		this.grapes = grapes;
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 
-	public String getCountry() {
-		return country;
+	public String getPaymentMethod() {
+		return paymentMethod;
 	}
 
-	public void setCountry(String country) {
-		this.country = country;
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
 	}
 
-	public String getRegion() {
-		return region;
+	public double getTotalAmount() {
+		return totalAmount;
 	}
 
-	public void setRegion(String region) {
-		this.region = region;
+	public void setTotalAmount(double totalAmount) {
+		this.totalAmount = totalAmount;
 	}
-
-	public String getDecsription() {
-		return description;
-	}
-
-	public void setDecsription(String decsription) {
-		this.description = decsription;
-	}
-
-	public String getPicture() {
-		return picture;
-	}
-
-	public void setPicture(String picture) {
-		this.picture = picture;
-	}
-
-	// @Override
-	// public String toString() {
-	// return "Wine [id=" + id + ", year=" + year + ", name=" + name + ", grapes=" +
-	// grapes + ", country=" + country
-	// + ", region=" + region + ", decsription=" + description + ", picture=" +
-	// picture + "]";
-	// }
-
 }

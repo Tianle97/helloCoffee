@@ -2,8 +2,10 @@ package com.tus.restbucks.dto;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
-@Table(name = "coffee")
+@Table(name = "coffees")
 public class Coffee {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +28,12 @@ public class Coffee {
   private String milkType;
 
   @Column(name = "extras")
-  private String[] extras;
+  private String extras;
+
+  @ManyToOne
+  @JoinColumn(name = "order_id")
+  @JsonBackReference
+  private Order order;
 
   public Coffee() {
   }
@@ -38,7 +45,7 @@ public class Coffee {
   }
 
   // a constructor contains all the fields
-  public Coffee(String type, String image, String size, String sugar, String milkType, String[] extras) {
+  public Coffee(String type, String image, String size, String sugar, String milkType, String extras) {
     this.type = type;
     this.image = image;
     this.size = size;
@@ -88,11 +95,11 @@ public class Coffee {
     this.milkType = milkType;
   }
 
-  public String[] getExtras() {
+  public String getExtras() {
     return extras;
   }
 
-  public void setExtras(String[] extras) {
+  public void setExtras(String extras) {
     this.extras = extras;
   }
 
@@ -102,5 +109,13 @@ public class Coffee {
 
   public void setImage(String image) {
     this.image = image;
+  }
+
+  public Order getOrder() {
+    return order;
+  }
+
+  public void setOrder(Order order) {
+    this.order = order;
   }
 }

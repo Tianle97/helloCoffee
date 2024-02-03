@@ -23,81 +23,61 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tus.restbucks.dao.OrderRepository;
 import com.tus.restbucks.dto.Order;
-import com.tus.restbucks.exceptions.OrderNotFoundException;
+import com.tus.restbucks.exceptions.NotFoundException;
 
 @RestController
+@RequestMapping("/orders")
 public class OrderService {
 
 	@Autowired
-	OrderRepository wineRepo;
-	// Wine wine;
+	OrderRepository orderRepo;
 
-	// Root / - http://localhost:8081/
-	// @GetMapping("/")
-	// public String index() {
-	// return "<h1>WineCellar Application</h1>";
-	// }
-
-	// Get All Wines - http://localhost:8081/wines/
-	@GetMapping("/wines")
-	public Iterable<Order> getAllWines() {
-		return wineRepo.findAll();
+	// Get All Orders - http://localhost:8081/
+	@GetMapping
+	public Iterable<Order> getAllOrders() {
+		return orderRepo.findAll();
 	}// End of method
 
-	// Get A wine with id - http://localhost:8081/wines/6
-	@GetMapping("/wines/{id}")
+	// Get an order with id - http://localhost:8081/6
+	@GetMapping("/{id}")
 	public Optional<Order> getWineById(@PathVariable("id") Long id) {
-		Optional<Order> wine = wineRepo.findById(id);
-		if (wine.isPresent()) {
-			return wine;
+		Optional<Order> order = orderRepo.findById(id);
+		if (order.isPresent()) {
+			return order;
 		} else {
-			throw new OrderNotFoundException("No wine with id: " + id);
+			throw new NotFoundException("No order with id: " + id);
 		}
 	}// End of Find by id method
 
-	// Create a wine - http://localhost:8081/wines/
-	@PostMapping("/wines")
-	public ResponseEntity createWine(@Valid @RequestBody Order wine) {
-		Order savedWine = wineRepo.save(wine);
-		return ResponseEntity.status(HttpStatus.OK).body(savedWine);
+	// Create a order - http://localhost:8081/
+	@PostMapping
+	public ResponseEntity createWine(@Valid @RequestBody Order order) {
+		Order savedOrder = orderRepo.save(order);
+		return ResponseEntity.status(HttpStatus.OK).body(savedOrder);
 	}// End of create Method
 
-	// Update wine by id - http://localhost:8081/wines/65
-	@PutMapping("wines/{id}")
-	public ResponseEntity updateWine(@PathVariable("id") Long id, @RequestBody Order wine) {
-		Optional<Order> savedWine = wineRepo.findById(id);
-		if (savedWine.isPresent()) {
-			wineRepo.save(wine);
+	// Update order by id - http://localhost:8081/65
+	@PutMapping("/{id}")
+	public ResponseEntity updateWine(@PathVariable("id") Long id, @RequestBody Order order) {
+		Optional<Order> savedOrder = orderRepo.findById(id);
+		if (savedOrder.isPresent()) {
+			orderRepo.save(order);
 			// Just return 200 ok response
-			return ResponseEntity.status(HttpStatus.OK).body(wine);
+			return ResponseEntity.status(HttpStatus.OK).body(order);
 		} else {
-			throw new OrderNotFoundException("No wine with id" + id);
+			throw new NotFoundException("No order with id" + id);
 		}
 	}// End of Update Method
 
-	// Delete a wine by id - http://localhost:8081/wines/66
-	@DeleteMapping("/wines/{id}")
+	// Delete a order by id - http://localhost:8081/66
+	@DeleteMapping("/{id}")
 	public void deleteWineById(@PathVariable Long id) {
-		Optional<Order> wine = wineRepo.findById(id);
-		if (wine.isPresent()) {
-			Order existingWine = wine.get();
-			wineRepo.delete(existingWine);
+		Optional<Order> order = orderRepo.findById(id);
+		if (order.isPresent()) {
+			Order existingWine = order.get();
+			orderRepo.delete(existingWine);
 		} else {
-			throw new OrderNotFoundException("No wine with id: " + id);
+			throw new NotFoundException("No order with id: " + id);
 		}
 	}// End of Delete Method
-
-	// Search for a wine using part of its name (Wildcard) -
-	@RequestMapping("/wines/name/{name}")
-	public ResponseEntity<List<Order>> getWineByName(@PathVariable("name") String name) {
-		List<Order> winesByName = new ArrayList<>();
-		// winesByName = wineRepo.findByName(name); this is exact match
-		winesByName = wineRepo.findByNameContaining(name);
-		if (winesByName.size() > 0) {
-			return new ResponseEntity(winesByName, HttpStatus.OK);
-		} else {
-			return new ResponseEntity(winesByName, HttpStatus.NO_CONTENT);
-		}
-	}// End of Search for a wine using part of its name (Wildcard)
-
 }

@@ -13,7 +13,6 @@ import com.tus.restbucks.dto.Order;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
-	List<Order> findByName(String name);
+	List<Order> findByOrderStatus(String orderStatus);
 
-	List<Order> findByNameContaining(String name);
 }
