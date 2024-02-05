@@ -40,7 +40,7 @@ public class OrderService {
 
 	// Get an order with id - http://localhost:8081/6
 	@GetMapping("/{id}")
-	public Optional<Order> getWineById(@PathVariable("id") Long id) {
+	public Optional<Order> getOrderById(@PathVariable("id") Long id) {
 		Optional<Order> order = orderRepo.findById(id);
 		if (order.isPresent()) {
 			return order;
@@ -51,14 +51,14 @@ public class OrderService {
 
 	// Create a order - http://localhost:8081/
 	@PostMapping
-	public ResponseEntity createWine(@Valid @RequestBody Order order) {
+	public ResponseEntity createOrder(@Valid @RequestBody Order order) {
 		Order savedOrder = orderRepo.save(order);
 		return ResponseEntity.status(HttpStatus.OK).body(savedOrder);
 	}// End of create Method
 
 	// Update order by id - http://localhost:8081/65
 	@PutMapping("/{id}")
-	public ResponseEntity updateWine(@PathVariable("id") Long id, @RequestBody Order order) {
+	public ResponseEntity updateOrder(@PathVariable("id") Long id, @RequestBody Order order) {
 		Optional<Order> savedOrder = orderRepo.findById(id);
 		if (savedOrder.isPresent()) {
 			orderRepo.save(order);
@@ -71,11 +71,11 @@ public class OrderService {
 
 	// Delete a order by id - http://localhost:8081/66
 	@DeleteMapping("/{id}")
-	public void deleteWineById(@PathVariable Long id) {
+	public void deleteOrderById(@PathVariable Long id) {
 		Optional<Order> order = orderRepo.findById(id);
 		if (order.isPresent()) {
-			Order existingWine = order.get();
-			orderRepo.delete(existingWine);
+			Order existingOrder = order.get();
+			orderRepo.delete(existingOrder);
 		} else {
 			throw new NotFoundException("No order with id: " + id);
 		}
