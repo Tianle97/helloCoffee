@@ -1,4 +1,4 @@
-package com.tus.restbucks.controller.test;
+package com.tus.restbucks.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
