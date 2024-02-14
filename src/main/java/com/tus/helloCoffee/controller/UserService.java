@@ -21,14 +21,42 @@ public class UserService {
 
   // Create
   @PostMapping("/new")
-  public ResponseEntity createUser(@RequestBody User user) {
+  public ResponseEntity<CustomResponse> createUser(@RequestBody User user) {
     User savedUser = userRepo.findByUsername(user.getUsername());
     if (savedUser == null) {
       userRepo.save(user);
       user.setPassword("");
-      return ResponseEntity.status(HttpStatus.OK).body("User " + user.getUsername() + " created !");
+      CustomResponse response = new CustomResponse();
+      response.setStatus(HttpStatus.OK.value());
+      response.setMessage("User " + user.getUsername() + " created !");
+      return ResponseEntity.status(HttpStatus.OK).body(response);
     } else {
-      return ResponseEntity.status(HttpStatus.CONFLICT).body("username " + user.getUsername() + " already exist.");
+      CustomResponse response = new CustomResponse();
+      response.setStatus(HttpStatus.CONFLICT.value());
+      response.setMessage("username " + user.getUsername() + " already exist.");
+      return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+    }
+  }
+
+  // Create
+  @PostMapping("/login")
+  public ResponseEntity<CustomResponse> loginUser(@RequestBody User user) {
+    User savedUser = userRepo.findByUsername(user.getUsername());
+    CustomResponse response = new CustomResponse();
+    if (savedUser != null) {
+      if (savedUser.getPassword().equals(user.getPassword())) {
+        response.setStatus(HttpStatus.OK.value());
+        response.setMessage("User " + user.getUsername() + " logged in !");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+      } else {
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        response.setMessage("Wrong username/password for user " + user.getUsername());
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+      }
+    } else {
+      response.setStatus(HttpStatus.UNAUTHORIZED.value());
+      response.setMessage("Wrong username/password for user " + user.getUsername());
+      return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
   }
 

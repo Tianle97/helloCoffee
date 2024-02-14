@@ -49,26 +49,23 @@ window.onload = function () {
       })
         .then(function (response) {
           if (response.ok) {
-            return response.text();
+            return response.json();
           } else if (response.status === 409) {
-            throw new Error("username exist!" + response.statusText);
+            return response.json().then((error) => {
+              throw new Error("username exist!" + response.statusText);
+            });
           } else if (response.status === 401) {
-            throw new Error("Unauthorized !" + response.statusText);
+            return response.json().then((error) => {
+              throw new Error("Unauthorized !" + response.statusText);
+            });
           } else {
-            throw new Error("Something wrong ! " + response.statusText);
+            return response.json().then((error) => {
+              throw new Error("Something wrong ! " + response.statusText);
+            });
           }
         })
         .then(function (data) {
-          // Open a pop-up window to display the success message
-          var popupWindow = window.open("", "_blank", "width=400,height=200");
-          popupWindow.document.write("<h1>Success</h1>");
-          popupWindow.document.write(
-            "<p>" + data + "</p>" + "<p> Please login to continue </p>"
-          );
-          popupWindow.document.write(
-            "<button onclick='window.close()'>Close</button>"
-          );
-          popupWindow.document.close();
+          alert(data.message);
           document.getElementById("loginSection").style.display = "block";
           document.getElementById("registerSection").style.display = "none";
         })
@@ -79,14 +76,7 @@ window.onload = function () {
           document.getElementById("confirmPassword").value = "";
         })
         .catch(function (error) {
-          // Open a pop-up window to display the error message
-          var popupWindow = window.open("", "_blank", "width=400,height=200");
-          popupWindow.document.write("<h1>Error</h1>");
-          popupWindow.document.write("<p>" + error.message + "</p>");
-          popupWindow.document.write(
-            "<button onclick='window.close()'>Close</button>"
-          );
-          popupWindow.document.close();
+          alert("error: " + error.message);
         });
     });
 
@@ -208,6 +198,51 @@ window.onload = function () {
       rowNumber = $("#orderTable tbody tr").length + 1;
     }
   });
+
+  // login-function
+  document
+    .getElementById("custLoginForm")
+    .addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      var username = document.getElementById("customer-username").value;
+      var password = document.getElementById("customer-password").value;
+
+      fetch("http://localhost:8081/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: username, password: password }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else if (response.status === 409) {
+            return response.json().then((error) => {
+              throw new Error(response.json());
+            });
+          } else if (response.status === 401) {
+            return response.json().then((error) => {
+              throw new Error(error.message);
+            });
+          } else {
+            return response.json().then((error) => {
+              throw new Error("Something wrong ! " + response.jso);
+            });
+          }
+        })
+        .then((data) => {
+          alert(data.message);
+          document.getElementById("loginLink").text = username;
+          document.getElementById("loginLink").style.pointerEvents = "none";
+          document.getElementById("loginSection").style.display = "none";
+          document.getElementById("makeOrderSection").style.display = "block";
+        })
+        .catch(function (error) {
+          alert("error: " + error.message);
+        });
+    });
 
   // place order function
 };

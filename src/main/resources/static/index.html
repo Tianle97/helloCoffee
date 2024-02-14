@@ -106,7 +106,7 @@
     </nav>
     <!-- end of navbar -->
 
-    <!-- modal -->
+    <!-- logout modal -->
     <div class="modal fade" id="sign-out">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -128,12 +128,12 @@
         </div>
       </div>
     </div>
-    <!-- end of modal -->
+    <!-- end of logout modal -->
     <!-- <p>TEXT</p>
     <p>TEXT</p> -->
 
     <!-- log in form -->
-    <section id="loginSection" style="display: none">
+    <section id="loginSection" style="display: block">
       <div class="container-fluid">
         <div class="row">
           <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
@@ -173,7 +173,7 @@
                     role="tabpanel"
                     aria-labelledby="customer-tab"
                   >
-                    <form>
+                    <form id="custLoginForm">
                       <div class="form-group">
                         <label for="customer-username">Username</label>
                         <input
@@ -293,7 +293,7 @@
     <!-- end of register section -->
 
     <!-- makeOrder form -->
-    <section id="makeOrderSection" style="display: block">
+    <section id="makeOrderSection" style="display: none">
       <div class="container-fluid">
         <div class="row row pt-md-5 mt-md-3 mb-5">
           <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
@@ -465,9 +465,9 @@
     </div>
     <!-- end of Order Modal -->
 
-    <!-- center section -->
+    <!-- show order section -->
     <section>
-      <div class="container-fluid">
+      <div class="container-fluid" style="display: none">
         <div class="row">
           <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
             <div
@@ -477,10 +477,24 @@
         </div>
       </div>
     </section>
-    <!-- end of center section -->
+    <!-- end of show order section -->
+
+        <!-- center section -->
+        <section>
+          <div class="container-fluid" style="display: none">
+            <div class="row">
+              <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+                <div
+                  class="row row pt-md-5 mt-md-3 mb-5 justify-content-center"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- end of center section -->
 
     <!-- tables -->
-    <section>
+    <section style="display: none">
       <div class="container-fluid">
         <div class="row mb-5">
           <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
@@ -697,7 +711,7 @@
     <!-- end of tables -->
 
     <!-- cards -->
-    <section id="cardsSection" style="display: block">
+    <section id="cardsSection" style="display: none">
       <div class="container-fluid">
         <div class="row">
           <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
