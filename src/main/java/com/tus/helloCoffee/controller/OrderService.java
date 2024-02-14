@@ -2,7 +2,7 @@
  * Author: Tianle Shu
  * Date: 23/01/24
  */
-package com.tus.restbucks.controller;
+package com.tus.helloCoffee.controller;
 
 import java.util.*;
 import java.util.Optional;
@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tus.restbucks.dao.OrderRepository;
-import com.tus.restbucks.dto.Order;
-import com.tus.restbucks.exceptions.NotFoundException;
+import com.tus.helloCoffee.dao.OrderRepository;
+import com.tus.helloCoffee.dto.Order;
+import com.tus.helloCoffee.exceptions.NotFoundException;
 
 @RestController
 @RequestMapping("/orders")

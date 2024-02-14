@@ -1,4 +1,4 @@
-package com.tus.restbucks.controller;
+package com.tus.helloCoffee.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tus.restbucks.dao.UserRepository;
-import com.tus.restbucks.dto.User;
+import com.tus.helloCoffee.dao.UserRepository;
+import com.tus.helloCoffee.dto.User;
 
 @SpringBootTest
 @AutoConfigureMockMvc

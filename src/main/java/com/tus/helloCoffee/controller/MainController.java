@@ -1,4 +1,4 @@
-package com.tus.restbucks.controller;
+package com.tus.helloCoffee.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

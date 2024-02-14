@@ -1,4 +1,4 @@
-package com.tus.restbucks.dto;
+package com.tus.helloCoffee.dto;
 
 import javax.persistence.*;
 

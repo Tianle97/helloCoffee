@@ -1,4 +1,4 @@
-package com.tus.restbucks.exceptions;
+package com.tus.helloCoffee.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

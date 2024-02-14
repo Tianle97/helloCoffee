@@ -1,10 +1,10 @@
-package com.tus.restbucks.controller;
+package com.tus.helloCoffee.controller;
 
-import com.tus.restbucks.dto.Coffee;
-import com.tus.restbucks.dto.Order;
-import com.tus.restbucks.exceptions.NotFoundException;
-import com.tus.restbucks.controller.CoffeeService;
-import com.tus.restbucks.dao.CoffeeRepository;
+import com.tus.helloCoffee.dto.Coffee;
+import com.tus.helloCoffee.dto.Order;
+import com.tus.helloCoffee.exceptions.NotFoundException;
+import com.tus.helloCoffee.controller.CoffeeService;
+import com.tus.helloCoffee.dao.CoffeeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
