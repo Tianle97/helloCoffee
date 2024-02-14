@@ -1,6 +1,20 @@
-body {
+/* body {
   font-family: 'Montserrat', sans-serif;
   background-color: #eee;
+  background: url(../images/bk.jpeg);
+} */
+body::before {
+  content: "";
+  background: url(../images/bk.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.03;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
 }
 
 /* navbar */
@@ -102,6 +116,11 @@ body {
   box-shadow: 2px 3px 15px #999;
   transform: translateY(-1px);
 }
+
+#menuCards {
+  height: 600px; /* Adjust this value based on the height of your cards */
+  overflow-y: auto;
+}
 /* end of cards */
 
 /* task list */
@@ -109,6 +128,7 @@ body {
   border-left: 3px solid #f66436;
 }
 /* end of task list */
+
 
 
 

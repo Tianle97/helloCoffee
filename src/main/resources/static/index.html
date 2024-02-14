@@ -55,7 +55,8 @@
                 </li>
                 <li class="nav-item">
                   <a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"
-                    ><i class="fas fa-user text-light fa-lg mr-3"></i>Profile</a
+                    ><i class="fas fa-cart-plus text-light fa-lg mr-3"></i
+                    >Order</a
                   >
                 </li>
                 <li class="nav-item">
@@ -132,7 +133,7 @@
     <p>TEXT</p> -->
 
     <!-- log in form -->
-    <section id="loginSection" style="display: block">
+    <section id="loginSection" style="display: none">
       <div class="container-fluid">
         <div class="row">
           <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
@@ -290,6 +291,179 @@
       </div>
     </section>
     <!-- end of register section -->
+
+    <!-- makeOrder form -->
+    <section id="makeOrderSection" style="display: block">
+      <div class="container-fluid">
+        <div class="row row pt-md-5 mt-md-3 mb-5">
+          <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+            <div class="row align-items-center">
+              <div class="col-xl-6 col-12 mb-4 mb-xl-0">
+                <h3 class="text-muted text-center mb-3">Menu</h3>
+                <div id="menuCards">
+                  <div class="col-xl-10 offset-xl-1 col-sm-10 offset-sm-1 p-2">
+                    <div class="card card-common">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <img src="images/espresso.png" width="150" class="mr-3" alt="Espresso Image">
+                          <div class="text-right text-secondary">
+                            <h5 class="card-title">Espresso</h5>
+                            <h3 class="card-price">€2.50</h3>
+                          </div>
+                        </div>
+                        <p class="card-text">A concentrated coffee shot known for its strong flavor, brewed by forcing hot water through finely-ground coffee beans.</p>
+                      </div>
+                      <div class="card-footer text-secondary">
+                        <a href="#" class="add-to-cart" data-toggle="modal" data-target="#orderModal">
+                          <i class="fas fa-shopping-cart mr-3"></i>
+                          <span>Add to cart</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-xl-10 offset-xl-1 col-sm-10 offset-sm-1 p-2">
+                    <div class="card card-common">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <img src="images/cappuccino.jpeg" width="150" class="mr-3" alt="Espresso Image">
+                          <div class="text-right text-secondary">
+                            <h5 class="card-title">Cappuccino</h5>
+                            <h3 class="card-price">€3.50</h3>
+                          </div>
+                        </div>
+                        <p class="card-text">An an espresso-based coffee beverage topped with equal parts of steamed milk and foam, creating a rich and frothy texture.</p>
+                      </div>
+                      <div class="card-footer text-secondary">
+                        <a href="#" class="add-to-cart" data-toggle="modal" data-target="#orderModal">
+                          <i class="fas fa-shopping-cart mr-3"></i>
+                          <span>Add to cart</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-xl-10 offset-xl-1 col-sm-10 offset-sm-1 p-2">
+                    <div class="card card-common">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <img src="images/cappuccino.jpeg" width="150" class="mr-3" alt="Espresso Image">
+                          <div class="text-right text-secondary">
+                            <h5 class="card-title">Cappuccino</h5>
+                            <h3 class="card-price">€3.50</h3>
+                          </div>
+                        </div>
+                        <p class="card-text">An an espresso-based coffee beverage topped with equal parts of steamed milk and foam, creating a rich and frothy texture.</p>
+                      </div>
+                      <div class="card-footer text-secondary">
+                        <a href="#" class="add-to-cart" data-toggle="modal" data-target="#orderModal">
+                          <i class="fas fa-shopping-cart mr-3"></i>
+                          <span>Add to cart</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                
+                </div>
+              </div>
+              <div class="col-xl-6 col-12 align-self-start">
+                <h3 class="text-muted text-center mb-3">Order</h3>
+                <table id="orderTable" class="table table-striped bg-light text-center">
+                  <thead>
+                    <tr class="text-muted">
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Size</th>
+                      <th>Sugar</th>
+                      <th>Milk</th>
+                      <th>Count</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="4">Total</td>
+                      <td id="totalPrice">€0.00</td>
+                    </tr>
+                    <tr>
+                      <td colspan="7">
+                        <button id="placeOrder" class="btn btn-primary">Place Order</button>
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end of makeOrder form -->
+
+
+    
+    <!-- Order Modal -->
+    <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="orderModalLabel">Custom</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="coffeeName">Coffee Name</label>
+                <input type="text" class="form-control" id="coffeeName" value="Espresso" readonly>
+              </div>
+              <div class="form-group">
+                <label for="coffeePrice">Price</label>
+                <input type="text" class="form-control" id="coffeePrice" value="€2.50" readonly>
+              </div>
+              <div class="form-group">
+                <label for="sizeOption">Size</label>
+                <select class="form-control" id="sizeOption">
+                  <option>Small</option>
+                  <option>Medium</option>
+                  <option>Large</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="sugarOption">Sugar</label>
+                <select class="form-control" id="sugarOption">
+                  <option>None</option>
+                  <option>Light</option>
+                  <option>Regular</option>
+                  <option>Extra</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="milkOption">Milk</label>
+                <select class="form-control" id="milkOption">
+                  <option>No Milk</option>
+                  <option>Regular Milk</option>
+                  <option>Soy Milk</option>
+                  <option>Almond Milk</option>
+                  <option>Coconut Milk</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Order</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of Order Modal -->
 
     <!-- center section -->
     <section>
